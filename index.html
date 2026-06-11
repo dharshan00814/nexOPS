@@ -686,6 +686,213 @@
             position: relative;
         }
 
+        /* Make member cards clickable (button-like) */
+        .member-card {
+            outline: none;
+        }
+
+        .member-card[role="button"] {
+            cursor: pointer;
+        }
+
+        .member-card[role="button"]:hover {
+            transform: translateY(-8px);
+        }
+
+        .member-card[role="button"]:focus-visible {
+            box-shadow: 0 0 0 4px rgba(79, 63, 240, 0.25), 0 20px 40px rgba(79, 63, 240, 0.08);
+            border-color: rgba(79, 63, 240, 0.35);
+        }
+
+        /* ── TEAM MODAL ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.55);
+            backdrop-filter: blur(10px) saturate(140%);
+            -webkit-backdrop-filter: blur(10px) saturate(140%);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+        }
+
+        .modal-overlay.is-open {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 920px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+            transform: translateY(10px);
+            opacity: 0;
+            transition: transform 0.22s ease, opacity 0.22s ease;
+        }
+
+        .modal-overlay.is-open .modal {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 1.25rem 0.75rem;
+            border-bottom: 1px solid rgba(10, 10, 15, 0.08);
+            background: linear-gradient(135deg, rgba(79, 63, 240, 0.08) 0%, rgba(0, 217, 163, 0.06) 100%);
+        }
+
+        .modal-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .modal-name {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-role {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .modal-close {
+            appearance: none;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--ink);
+            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(79, 63, 240, 0.25);
+        }
+
+        .modal-body {
+            padding: 1.25rem;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .modal-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 18px 45px rgba(31, 38, 135, 0.16);
+            background: linear-gradient(135deg, rgba(79, 63, 240, 0.15), rgba(0, 217, 163, 0.15));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .modal-bio {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal-link {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(10, 10, 15, 0.08);
+            background: rgba(255, 255, 255, 0.65);
+            color: var(--ink);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .modal-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(79, 63, 240, 0.25);
+            box-shadow: 0 10px 22px rgba(79, 63, 240, 0.12);
+        }
+
+        @media(max-width:900px) {
+            .modal-grid {
+                grid-template-columns: 200px 1fr;
+            }
+        }
+
+        @media(max-width:540px) {
+            .modal {
+                max-width: 100%;
+            }
+
+            .modal-header {
+                padding: 1rem 1rem 0.75rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-photo {
+                width: 160px;
+                height: 160px;
+            }
+
+            .modal-close {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+
         .team-header {
             display: flex;
             justify-content: space-between;
@@ -1304,7 +1511,14 @@
         <div class="team-grid">
 
             <!-- Member 1 -->
-            <div class="member-card">
+            <div class="member-card" role="button" tabindex="0"
+                data-name="Asthamil"
+                data-role="Lead Developer"
+                data-bio="Asthamil leads our engineering efforts—building scalable web experiences with clean architecture, strong performance, and thoughtful UX."
+                data-photo="https://i.postimg.cc/Jnwtf3ZZ/Whats-App-Image-2026-02-20-at-7-00-57-PM.jpg"
+                data-portfolio="#"
+                data-github="#"
+                data-linkedin="#">
                 <div class="member-photo">
                     <img src="https://i.postimg.cc/Jnwtf3ZZ/Whats-App-Image-2026-02-20-at-7-00-57-PM.jpg"
                         alt="Web Developer"
@@ -1327,7 +1541,14 @@
             </div>
 
             <!-- Vignesh -->
-            <div class="member-card">
+            <div class="member-card" role="button" tabindex="0"
+                data-name="Vignesh"
+                data-role="Cloud Architect"
+                data-bio="Vignesh designs reliable cloud platforms—focusing on scalability, security, cost efficiency, and operational excellence across AWS/GCP/Azure." 
+                data-photo="https://i.postimg.cc/mkg4JhXX/IMG-33081.jpg"
+                data-portfolio="https://vigneshvl-dev.github.io/PORTFOLIO//"
+                data-github="https://github.com/vigneshvl-dev"
+                data-linkedin="https://www.linkedin.com/in/vigneshvl-dev/">
                 <div class="member-photo">
                     <img src="https://i.postimg.cc/mkg4JhXX/IMG-33081.jpg" alt="Vignesh"
                         onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>☁️</div>'">
@@ -1349,7 +1570,14 @@
             </div>
 
             <!-- Jashwin -->
-            <div class="member-card">
+            <div class="member-card" role="button" tabindex="0"
+                data-name="Jashwin"
+                data-role="Full Stack Developer"
+                data-bio="Jashwin builds end-to-end systems—responsive frontends, robust APIs, and data-driven backends—focused on reliability and clean developer experience." 
+                data-photo="https://i.postimg.cc/QtwL4S7M/Screenshot-2026-06-11-112412.png"
+                data-portfolio="#"
+                data-github="#"
+                data-linkedin="#">
                 <div class="member-photo">
                     <img src="https://i.postimg.cc/QtwL4S7M/Screenshot-2026-06-11-112412.png" alt="Jashwin"
                         onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>🧑‍💻</div>'">
@@ -1371,7 +1599,14 @@
             </div>
 
             <!-- Dharshan -->
-            <div class="member-card">
+            <div class="member-card" role="button" tabindex="0"
+                data-name="Dharshan"
+                data-role="Cyber Security Engineer"
+                data-bio="Dharshan protects products through threat modeling, penetration testing, and secure engineering practices—helping teams build safer systems from day one." 
+                data-photo="https://i.postimg.cc/YS0y5YMG/Whats-App-Image-2026-06-11-at-11-21-13-AM.jpg"
+                data-portfolio="https://portholio-zeta.vercel.app/#"
+                data-github="https://github.com/dharshan00814"
+                data-linkedin="www.linkedin.com/in/dharshan-jm">
                 <div class="member-photo">
                     <img src="https://i.postimg.cc/YS0y5YMG/Whats-App-Image-2026-06-11-at-11-21-13-AM.jpg"
                         alt="Dharshan"
@@ -1394,7 +1629,14 @@
             </div>
 
             <!-- Tharun Krishna -->
-            <div class="member-card">
+            <div class="member-card" role="button" tabindex="0"
+                data-name="Tharun Krishna"
+                data-role="Product Designer"
+                data-bio="Tharun creates intuitive and engaging user experiences through thoughtful design and research." 
+                data-photo="https://i.postimg.cc/TP5Jj9Th/Whats-App-Image-2026-06-11-at-11-26-46-AM.jpg"
+                data-portfolio="#"
+                data-github="#"
+                data-linkedin="#">
                 <div class="member-photo">
                     <img src="https://i.postimg.cc/TP5Jj9Th/Whats-App-Image-2026-06-11-at-11-26-46-AM.jpg"
                         alt="Tharun Krishna"
@@ -1417,7 +1659,14 @@
             </div>
 
             <!-- Mohammad Zarif -->
-            <div class="member-card">
+            <div class="member-card"role="button" tabindex="0"
+                data-name="Mohammad Zarif"
+                data-role="App Developer"
+                data-bio="Mohammad is a passionate app developer with a keen eye for detail and a love for creating seamless user experiences." 
+                data-photo="https://i.postimg.cc/TP5Jj9Th/Whats-App-Image-2026-06-11-at-11-26-46-AM.jpg"
+                data-portfolio="#"
+                data-github="#"
+                data-linkedin="#">
                 <div class="member-photo">
                     <div class="member-photo-placeholder">📱</div>
                 </div>
@@ -1529,6 +1778,143 @@
             </div>
         </div>
     </footer>
+
+    <!-- Team Modal (injected content target) -->
+    <div class="modal-overlay" id="teamModalOverlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="teamModalName">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="modal-name" id="teamModalName">—</div>
+                    <div class="modal-role" id="teamModalRole">—</div>
+                </div>
+                <button class="modal-close" type="button" id="teamModalClose" aria-label="Close modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-photo" aria-hidden="true">
+                        <img id="teamModalPhoto" alt="" src="" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend', '<div class=\'member-photo-placeholder\'>👤</div>')">
+                    </div>
+                    <div>
+                        <div class="modal-bio" id="teamModalBio">—</div>
+                        <div class="modal-links" id="teamModalLinks"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const overlay = document.getElementById('teamModalOverlay');
+            const closeBtn = document.getElementById('teamModalClose');
+
+            const nameEl = document.getElementById('teamModalName');
+            const roleEl = document.getElementById('teamModalRole');
+            const photoEl = document.getElementById('teamModalPhoto');
+            const bioEl = document.getElementById('teamModalBio');
+            const linksEl = document.getElementById('teamModalLinks');
+
+            const cards = Array.from(document.querySelectorAll('#team .member-card[role="button"]'));
+
+            let lastFocused = null;
+
+            function escapeHtml(str) {
+                return String(str)
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '<')
+                    .replaceAll('>', '>')
+                    .replaceAll('"', '"')
+                    .replaceAll("'", '&#039;');
+            }
+
+            function buildLink(label, href) {
+                const safeLabel = escapeHtml(label);
+                const safeHref = escapeHtml(href);
+                return `
+                    <a class="modal-link" href="${safeHref}" target="_blank" rel="noopener noreferrer">
+                        ${safeLabel} →
+                    </a>
+                `;
+            }
+
+            function openModal(card) {
+                lastFocused = document.activeElement;
+
+                const name = card.getAttribute('data-name') || '';
+                const role = card.getAttribute('data-role') || '';
+                const bio = card.getAttribute('data-bio') || '';
+                const photo = card.getAttribute('data-photo') || '';
+                const portfolio = card.getAttribute('data-portfolio') || '#';
+                const github = card.getAttribute('data-github') || '#';
+                const linkedin = card.getAttribute('data-linkedin') || '#';
+
+                nameEl.textContent = name;
+                roleEl.textContent = role;
+                bioEl.textContent = bio;
+
+                // Reset photo
+                photoEl.style.display = '';
+                photoEl.src = photo;
+                photoEl.alt = name;
+
+                // Reset placeholder if previous error inserted it
+                const photoContainer = photoEl.parentElement;
+                Array.from(photoContainer.querySelectorAll('.member-photo-placeholder')).forEach(n => n.remove());
+
+                // Links
+                const items = [];
+                if (portfolio && portfolio !== '#') items.push(buildLink('Portfolio', portfolio));
+                else items.push(buildLink('Portfolio', portfolio));
+                if (github && github !== '#') items.push(buildLink('GitHub', github));
+                else items.push(buildLink('GitHub', github));
+                if (linkedin && linkedin !== '#') items.push(buildLink('LinkedIn', linkedin));
+                else items.push(buildLink('LinkedIn', linkedin));
+
+                linksEl.innerHTML = items.join('');
+
+                overlay.classList.add('is-open');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+
+                // Focus close button for accessibility
+                closeBtn.focus();
+            }
+
+            function closeModal() {
+                overlay.classList.remove('is-open');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+
+                if (lastFocused && typeof lastFocused.focus === 'function') {
+                    lastFocused.focus();
+                }
+            }
+
+            // Open handlers
+            cards.forEach(card => {
+                card.addEventListener('click', () => openModal(card));
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(card);
+                    }
+                });
+            });
+
+            // Close handlers
+            closeBtn.addEventListener('click', closeModal);
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
 
 </body>
 
