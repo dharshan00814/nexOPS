@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nexOPS IQ — Tech& Experiences</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --ink: #0A0A0F;
+            --paper: #F7F6F2;
+            --accent: #4F3FF0;
+            --accent2: #00D9A3;
+            --muted: #6B6B7B;
+            --border: rgba(10, 10, 15, 0.1);
+            --card: #FFFFFF;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--paper);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 4rem;
+            background: rgba(247, 246, 242, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        .nav-cta {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 4rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        .hero-blob {
+            position: absolute;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 63, 240, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: breathe 6s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateY(-52%) scale(1.08);
+            }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            background: rgba(79, 63, 240, 0.08);
+            border: 1px solid rgba(79, 63, 240, 0.2);
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            width: fit-content;
+        }
+
+        .hero-tag::before {
+            content: '●';
+            font-size: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            font-weight: 800;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            max-width: 14ch;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 48ch;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(79, 63, 240, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(79, 63, 240, 0.4);
+        }
+
+        .btn-ghost {
+            color: var(--ink);
+            padding: 0.85rem 1.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+
+        .btn-ghost:hover {
+            gap: 0.8rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-num span {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+        }
+
+        /* ── SECTION COMMON ── */
+        section {
+            padding: 6rem 4rem;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            max-width: 54ch;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* ── SERVICES ── */
+        #services {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        #services .section-label {
+            color: var(--accent2);
+        }
+
+        #services .section-title {
+            color: var(--paper);
+        }
+
+        #services .section-sub {
+            color: rgba(247, 246, 242, 0.6);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            margin-top: 4rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            transition: background 0.3s;
+            cursor: default;
+        }
+
+        .service-card:hover {
+            background: rgba(79, 63, 240, 0.12);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(79, 63, 240, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--accent);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--paper);
+            margin-bottom: 0.7rem;
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: rgba(247, 246, 242, 0.55);
+            line-height: 1.65;
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            background: var(--paper);
+        }
+
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(79, 63, 240, 0.1), rgba(0, 217, 163, 0.1));
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-visual-inner {
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .about-manifesto {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+
+        .about-manifesto em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .about-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 100px;
+            background: rgba(79, 63, 240, 0.08);
+            border: 1px solid rgba(79, 63, 240, 0.2);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .about-text p strong {
+            color: var(--ink);
+        }
+
+        .about-values {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .value-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+
+        .value-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            background: rgba(79, 63, 240, 0.08);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .value-row h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .value-row p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ── TEAM ── */
+        #team {
+            background: #fff;
+        }
+
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .member-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--paper);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+
+        .member-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(10, 10, 15, 0.1);
+        }
+
+        .member-photo {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+            object-position: center top;
+        }
+
+        .member-card:hover .member-photo img {
+            transform: scale(1.05);
+        }
+
+        .member-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(79, 63, 240, 0.15), rgba(0, 217, 163, 0.15));
+            font-size: 3rem;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .member-role {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-tag {
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(79, 63, 240, 0.07);
+            color: var(--muted);
+            border: 1px solid rgba(79, 63, 240, 0.12);
+        }
+
+        /* ── PROCESS ── */
+        #process {
+            background: var(--paper);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 0 8px var(--paper);
+        }
+
+        .process-step h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── CTA BANNER ── */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--accent) 0%, #7C3AED 100%);
+            color: #fff;
+            padding: 5rem 4rem;
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            opacity: 0.8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-white {
+            display: inline-block;
+            background: #fff;
+            color: var(--accent);
+            padding: 0.9rem 2.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 4rem 4rem 2.5rem;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .nav-logo {
+            color: var(--paper);
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: rgba(247, 246, 242, 0.45);
+            margin-top: 0.8rem;
+            max-width: 28ch;
+        }
+
+        .footer-links h5 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: rgba(247, 246, 242, 0.5);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(247, 246, 242, 0.65);
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--paper);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(247, 246, 242, 0.35);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.8rem;
+            color: rgba(247, 246, 242, 0.35);
+            text-decoration: none;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:900px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-visual {
+                aspect-ratio: 3/2;
+            }
+
+            .team-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cta-banner {
+                padding: 3.5rem 1.5rem;
+            }
+
+            footer {
+                padding: 3rem 1.5rem 2rem;
+            }
+        }
+
+        @media(max-width:540px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">nexOPS <span>IQ</span></a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#process">Process</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Let's Talk →</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-blob"></div>
+        <div class="hero-tag">Available for new projects · 2026</div>
+        <h1>We build <em>digital products</em> that scale.</h1>
+        <p class="hero-sub">nexOPS IQ is a full-spectrum digital studio crafting websites, apps, SaaS platforms, and
+            brand identities for startups and scale-ups worldwide.</p>
+        <div class="hero-actions">
+            <a href="#services" class="btn-primary">Explore Our Work</a>
+            <a href="#team" class="btn-ghost">Meet the Team →</a>
+        </div>
+        <div class="hero-stats">
+            <div>
+                <div class="stat-num">50<span>+</span></div>
+                <div class="stat-label">Projects Shipped</div>
+            </div>
+            <div>
+                <div class="stat-num">6</div>
+                <div class="stat-label">Core Disciplines</div>
+            </div>
+            <div>
+                <div class="stat-num">98<span>%</span></div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div>
+                <div class="stat-num">3<span>yr</span></div>
+                <div class="stat-label">Studio Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="section-label">// What we do</div>
+        <h2 class="section-title">Every layer of your digital stack, covered.</h2>
+        <p class="section-sub">From pixel-perfect interfaces to cloud-native backends — we design, build, and ship
+            production-grade digital products end to end.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Web Development</h3>
+                <p>High-performance websites and web applications built with modern frameworks. SEO-optimised, fully
+                    responsive, and built to convert.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>App Development</h3>
+                <p>Native and cross-platform mobile apps for iOS and Android — from MVPs to full-scale consumer products
+                    with real-time features.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>UI / UX Design</h3>
+                <p>User research, information architecture, interaction design, and polished UI systems. We make complex
+                    things feel simple.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>Cloud & DevOps</h3>
+                <p>Scalable cloud architecture on AWS, GCP, or Azure. CI/CD pipelines, Kubernetes,
+                    infrastructure-as-code, and 99.9% uptime SLAs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>SaaS Products</h3>
+                <p>End-to-end SaaS development — multi-tenant architecture, billing integrations, admin dashboards, and
+                    growth tooling built in.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>Cyber Security</h3>
+                <p>Penetration testing, security audits, VAPT, compliance frameworks, and secure-by-design principles
+                    embedded into every project.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-inner">
+            <div class="about-visual">
+                <div class="about-visual-inner">
+                    <div class="about-manifesto">We don't just write code.<br><em>We craft digital experiences.</em>
+                    </div>
+                    <div class="about-badges">
+                        <span class="badge">React / Next.js</span>
+                        <span class="badge">Flutter</span>
+                        <span class="badge">AWS / GCP</span>
+                        <span class="badge">Kubernetes</span>
+                        <span class="badge">Figma</span>
+                        <span class="badge">Node.js</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">Zero Trust</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <div class="section-label">// About nexOPS IQ</div>
+                <h2 class="section-title">A studio built for the age of digital-first business.</h2>
+                <p>nexOPS IQ was founded by a team of engineers, designers, and cloud architects who were tired of
+                    watching great ideas fail because of bad execution. We built the studio we wished existed.</p>
+                <p>We work with <strong>startups, scale-ups, and enterprise teams</strong> to design and build the
+                    digital products they need to grow — without the agency bloat, missed deadlines, or post-launch
+                    silence.</p>
+                <p>Our team spans full-stack development, cloud infrastructure, product design, and cybersecurity —
+                    giving clients a single studio that covers every layer of their digital presence.</p>
+                <div class="about-values">
+                    <div class="value-row">
+                        <div class="value-icon">⚡</div>
+                        <div>
+                            <h4>Execution over promises</h4>
+                            <p>We ship. Every sprint has a deliverable. Every project has a clear timeline and owner.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="value-row">
+                        <div class="value-icon">🔬</div>
+                        <div>
+                            <h4>Engineering rigour</h4>
+                            <p>Code reviewed, tested, documented. We build things that last beyond the launch day.</p>
+                        </div>
+                    </div>
+                    <div class="value-row">
+                        <div class="value-icon">🤝</div>
+                        <div>
+                            <h4>Transparent partnership</h4>
+                            <p>Direct access to the people building your product. No account managers in the middle.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+        <div class="team-header">
+            <div>
+                <div class="section-label">// The team</div>
+                <h2 class="section-title">Six specialists, one studio.</h2>
+                <p class="section-sub">Each member brings deep expertise in their domain — together we cover everything
+                    your product needs.</p>
+            </div>
+        </div>
+        <div class="team-grid">
+
+            <!-- Member 1 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <img src="https://i.postimg.cc/Jnwtf3ZZ/Whats-App-Image-2026-02-20-at-7-00-57-PM.jpg"
+                        alt="Web Developer"
+                        onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>👨‍💻</div>'">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Lead Developer</div>
+                    <div class="member-role">Web Development</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">GraphQL</span>
+                        <span class="skill-tag">Tailwind</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vignesh -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <img src="https://i.postimg.cc/mkg4JhXX/IMG-33081.jpg" alt="Vignesh"
+                        onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>☁️</div>'">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Vignesh</div>
+                    <div class="member-role">Cloud Architect</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">GCP</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Serverless</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jashwin -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <img src="https://i.postimg.cc/QtwL4S7M/Screenshot-2026-06-11-112412.png" alt="Jashwin"
+                        onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>🧑‍💻</div>'">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Jashwin</div>
+                    <div class="member-role">Full Stack Developer</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Microservices</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dharshan -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <img src="https://i.postimg.cc/YS0y5YMG/Whats-App-Image-2026-06-11-at-11-21-13-AM.jpg"
+                        alt="Dharshan"
+                        onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>🔐</div>'">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Dharshan</div>
+                    <div class="member-role">Cyber Security Engineer</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">Penetration Testing</span>
+                        <span class="skill-tag">VAPT</span>
+                        <span class="skill-tag">OWASP</span>
+                        <span class="skill-tag">Zero Trust</span>
+                        <span class="skill-tag">SOC 2</span>
+                        <span class="skill-tag">Ethical Hacking</span>
+                        <span class="skill-tag">Kali Linux</span>
+                        <span class="skill-tag">Forensics</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tharun Krishna -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <img src="https://i.postimg.cc/TP5Jj9Th/Whats-App-Image-2026-06-11-at-11-26-46-AM.jpg"
+                        alt="Tharun Krishna"
+                        onerror="this.parentElement.innerHTML='<div class=\'member-photo-placeholder\'>🎨</div>'">
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Tharun Krishna</div>
+                    <div class="member-role">Product Designer</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">UI Design</span>
+                        <span class="skill-tag">UX Research</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">Design Systems</span>
+                        <span class="skill-tag">Motion</span>
+                        <span class="skill-tag">Branding</span>
+                        <span class="skill-tag">Framer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mohammad Zarif -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <div class="member-photo-placeholder">📱</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name">Mohammad Zarif</div>
+                    <div class="member-role">App Developer</div>
+                    <div class="member-skills">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Swift</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">App Store</span>
+                        <span class="skill-tag">Push Notifications</span>
+                        <span class="skill-tag">Offline Mode</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+        <div class="section-label">// How we work</div>
+        <h2 class="section-title">From brief to launch in four phases.</h2>
+        <p class="section-sub">A clear, collaborative process that keeps you informed and in control at every step.</p>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <h4>Discovery</h4>
+                <p>We dig into your goals, users, and constraints — then define exactly what we're building and why.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <h4>Design</h4>
+                <p>Wireframes, prototypes, and a polished design system — validated with real users before a line of
+                    code is written.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <h4>Build</h4>
+                <p>Two-week sprints with live demos. You see progress every fortnight — no disappearing acts.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">4</div>
+                <h4>Launch & Grow</h4>
+                <p>Deploy, monitor, iterate. We stay on after launch to help you scale what's working.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner" id="contact">
+        <h2>Ready to build something great?</h2>
+        <p>Tell us about your project — we'll get back within 24 hours.</p>
+        <a href="mailto:hello@nexcore.studio" class="btn-white">Start a conversation →</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo">nexOPS <span style="color:var(--accent2)">IQ</span></a>
+                <p>A full-spectrum digital studio building products that matter.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="#services">Web Development</a></li>
+                    <li><a href="#services">App Development</a></li>
+                    <li><a href="#services">UI / UX Design</a></li>
+                    <li><a href="#services">Cloud & DevOps</a></li>
+                    <li><a href="#services">SaaS Products</a></li>
+                    <li><a href="#services">Cyber Security</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Studio</h5>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="mailto:hello@nexcore.studio">hello@nexcore.studio</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter / X</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 nexOPS IQ. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
