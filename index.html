@@ -526,10 +526,14 @@
         }
 
         .member-photo {
-            width: 100%;
-            aspect-ratio: 1/1;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 2rem auto 0;
             overflow: hidden;
             position: relative;
+            box-shadow: 0 8px 20px rgba(10, 10, 15, 0.08);
+            border: 2px solid var(--border);
         }
 
         .member-photo img {
@@ -541,7 +545,7 @@
         }
 
         .member-card:hover .member-photo img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .member-photo-placeholder {
@@ -551,11 +555,12 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, rgba(79, 63, 240, 0.15), rgba(0, 217, 163, 0.15));
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
         .member-info {
             padding: 1.5rem;
+            text-align: center;
         }
 
         .member-name {
@@ -577,6 +582,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.4rem;
+            justify-content: center;
         }
 
         .skill-tag {
